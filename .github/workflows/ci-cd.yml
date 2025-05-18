@@ -18,7 +18,10 @@ jobs:
         with:
           python-version: 3.11
       - run: pip install -r requirements.txt
-      - run: pytest -q
+      - name: Run pytest with PYTHONPATH
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          pytest -q
 
   build:
     needs: test
